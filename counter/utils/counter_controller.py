@@ -6,14 +6,12 @@ from ..models import Ticket, Counter
 class CounterController:
 
     def __init__(self):
+        Ticket.objects.all().delete()
+
         self._ticket_queue = Queue()
         self._latest_serving_num = 0
         self._last_issued_num = 0
         self.counters = Counter.objects.all()
-
-        ticket_list = list(Ticket.objects.filter(complete=False))
-        for ticket in ticket_list:
-            self._ticket_queue.enqueue(ticket)
         
         self.resetCounters()
 

@@ -40,13 +40,18 @@ def counter(request):
 
     return render(request, 'counter.html', context)
 
-def customer(request):
+def customer(request=None):
     global customer_ticket
     global counter_controller
 
     context = counter_controller.getCounterData()
     context['customer_ticket'] = customer_ticket
-    if request.method == 'POST':
+
+
+
+    if request is None:
+        return context
+    elif request.method == 'POST':
         customer_ticket = counter_controller.takeTicket()
         context = counter_controller.getCounterData()
         context['customer_ticket'] = customer_ticket

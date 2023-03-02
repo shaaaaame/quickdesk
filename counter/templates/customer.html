@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Counter Management Application (Customer View)</title>
+        <script src="https://unpkg.com/htmx.org@1.7.0"></script>
         <style>
             *{
                 margin: 0;
@@ -25,7 +26,7 @@
                 display: flex
                 justify-content: center;
                 align-items: center;
-                background-color: grey;
+                border: 2px solid black;
             }
 
             .customer-ticketInfo-container{
@@ -46,16 +47,29 @@
                 height: 20vh;
             }
 
-            .counter-item{
+            .counter-item-online{
                 width: 20vw;
                 height: 100%;
-                background-color: grey;
                 padding: 2vh;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 position: relative;
+                border: 2px solid black;
+            }
+
+            .counter-item-offline{
+                width: 20vw;
+                height: 100%;
+                padding: 2vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                border: 2px solid black;
+                background-color: grey;
             }
 
             .counter-status{
@@ -76,10 +90,15 @@
                 background-color: green;
             }
 
+            .customer-ticket-btn{
+                font-size: 20px;
+                
+            }
+
 
         </style>
     </head>
-    <body>
+    <body hx-get="." hx-trigger="every 2s">
         <h1>Customer View</h1>
         <div class="customer-container">
             <form class='customer-ticketInfo' method='post'>
@@ -97,18 +116,25 @@
                     <h2>Please take a ticket number.</h2>
                 {% endif %}
             </div>
-            <div class=''>
+            <div>
                 <ul class='counter-list'>
                     {% for counter in counters %}
-                        <li class='counter-item'>
-                            {% if counter.cur_num %}
-                                <span class='counter-status is-red'></span>
-                            {% else %}
-                                <span class='counter-status is-green'></span>
-                            {% endif %}
-                            <h3>counter {{ counter.counter_number }}</h3>
-                            <p>{{ counter.cur_num }}</p>
-                        </li>
+                        {% if counter.is_online %}
+
+                            <li class='counter-item-online'>
+                                {% if counter.cur_num %}
+                                    <span class='counter-status is-red'></span>
+                                {% else %}
+                                    <span class='counter-status is-green'></span>
+                                {% endif %}
+                                <h3>counter {{ counter.counter_number }}</h3>
+                                <p>{{ counter.cur_num }}</p>
+                            </li>
+                        {% else %}
+                            <li class='counter-item-offline'>
+                                <h3>counter {{ counter.counter_number }} is offline!</h3>
+                            </li>
+                        {% endif %}
                     {% endfor %}
                 </ul>
             </div>
