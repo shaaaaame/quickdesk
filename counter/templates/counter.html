@@ -2,7 +2,46 @@
 <html>
     <head>
         <title>Counter Management Application (Management View)</title>
-        <link rel="stylesheet" href="counter.css">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: Roboto, sans-serif;
+            }
+
+            ul{
+                list-style-type: none;
+                list-style: none;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                width: 100vw;
+            }
+
+            .counter-list{
+                margin-top: 5vh;
+            }
+
+            .counter-item{
+                height: 50vh;
+                background-color: grey;
+                width: 20vw;
+                padding: 10px;
+            }
+
+            .counter-item-container{
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                justify-content: space-around;
+            }
+        
+            .counter-btn{
+                width: 100%;
+                height: 10%;
+            }
+        </style>
     </head>
     <body>
         <h1>Counter Management</h1>
@@ -14,12 +53,12 @@
                         <form class='counter-item-container' method='post'>
                             {% csrf_token %}
                             {% if counter.is_online %}
-                                <button class='counter-online-btn' name='offline' value={{counter.counter_number}}>Go Offline</button>
+                                <button class='counter-btn' name='offline' value={{counter.counter_number}}>Go Offline</button>
                             {% else %}
-                                <button class='counter-online-btn' name='online' value={{counter.counter_number}}>Go Online</button>
+                                <button class='counter-btn' name='online' value={{counter.counter_number}}>Go Online</button>
                             {% endif %}
-                            <button class='counter-complete-btn' name='complete' value={{counter.counter_number}}>Complete Current</button>
-                            <button class='counter-next-btn' name='next' value={{counter.counter_number}}>Call Next</button>
+                            <button class='counter-btn' name='complete' value={{counter.counter_number}}>Complete Current</button>
+                            <button class='counter-btn' name='next' value={{counter.counter_number}}>Call Next</button>
                         </form>
                     </li>
                 {% endfor %}

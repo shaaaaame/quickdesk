@@ -14,15 +14,15 @@ class Queue:
         # try:
         #   return self.queue.pop(0)
         # except:
-        # raise IndexError("Queue is empty")
+        #   raise IndexError("Queue is empty")
         
         # Without array methods:
-        try:
-            return_item = self.queue[0]
-            self.queue = self.queue[1:]
-            return return_item
-        except:
-            raise IndexError("Queue is empty")
+        if len(self.queue) == 0:
+            print("Queue is empty")
+            return None
+        return_item = self.queue[0]
+        self.queue = [self.queue[i] for i in range(1, len(self.queue))]
+        return return_item
         
         
     def getQueue(self) -> list[str]:

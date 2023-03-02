@@ -41,6 +41,8 @@ class CounterController:
 
     def serveTicket(self) -> Ticket:
         next_ticket = self._ticket_queue.dequeue()
+        if next_ticket is None:
+            return None
         self._latest_serving_num = next_ticket.ticket_number
 
         return next_ticket        

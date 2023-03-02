@@ -34,8 +34,9 @@ def counter(request):
         elif data.get('next'):
             counter = counters[int(data.get('next'))- 1]
             next_ticket = counter_controller.serveTicket()
-            counter.callNext(next_ticket.ticket_number)
-            counter.save()
+            if next_ticket is not None:
+                counter.callNext(next_ticket.ticket_number)
+                counter.save()
 
     return render(request, 'counter.html', context)
 
