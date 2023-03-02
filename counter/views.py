@@ -12,13 +12,11 @@ def index(request):
 
 def counter(request):
     global counter_controller
-    controller_data = counter_controller.getCounterData()
-    counters = controller_data['counters']
-    context = {'counters': counters}
+    context = counter_controller.getCounterData()
+    counters = context['counters']
 
     if request.method == 'POST':
         data = request.POST
-        print(data)
         if data.get('offline'):
             counter = counters[int(data.get('offline'))- 1]
             counter.setOffline()
@@ -46,8 +44,6 @@ def customer(request=None):
 
     context = counter_controller.getCounterData()
     context['customer_ticket'] = customer_ticket
-
-
 
     if request is None:
         return context

@@ -25,7 +25,8 @@ class CounterController:
         return {
             'counters': self.counters,
             'latest_serving_num': self._latest_serving_num,
-            'last_issued_num': self._last_issued_num
+            'last_issued_num': self._last_issued_num,
+            'is_queue_empty': self._ticket_queue.size() == 0
         }
 
     def takeTicket(self) -> Ticket:
@@ -38,9 +39,9 @@ class CounterController:
         return ticket
 
     def serveTicket(self) -> Ticket:
-        next_ticket = self._ticket_queue.dequeue()
-        if next_ticket is None:
+        if self._ticket_queue.size() == 0:
             return None
+        next_ticket = self._ticket_queue.dequeue()
         self._latest_serving_num = next_ticket.ticket_number
 
         return next_ticket        
