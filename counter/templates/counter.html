@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Counter Management Application (Management View)</title>
+        <link rel="stylesheet" href="counter.css">
+    </head>
+    <body>
+        <h1>Counter Management</h1>
+        <div class='counter-container'>
+            <ul class='counter-list'>
+                {% for counter in counters %}
+                    <li class='counter-item'>
+                        <h3>Counter {{ counter.counter_number }}</h3>
+                        <form class='counter-item-container' method='post'>
+                            {% csrf_token %}
+                            {% if counter.is_online %}
+                                <button class='counter-online-btn' name='offline' value={{counter.counter_number}}>Go Offline</button>
+                            {% else %}
+                                <button class='counter-online-btn' name='online' value={{counter.counter_number}}>Go Online</button>
+                            {% endif %}
+                            <button class='counter-complete-btn' name='complete' value={{counter.counter_number}}>Complete Current</button>
+                            <button class='counter-next-btn' name='next' value={{counter.counter_number}}>Call Next</button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Counter Management Application (Customer View)</title>
+        <link rel="stylesheet" href="counter.css">
+    </head>
+    <body>
+        <h1>Customer View</h1>
+        <form class='customer-ticketInfo' method='post'>
+            {% csrf_token %}
+            <h2>Now Serving: {{ latest_serving_num }}</h2>
+            <h2>Last Number: {{ last_issued_num }}</h2>
+            <button class='customer-ticket-btn' name="customer_ticket">Take a number</button>
+        </form>
+        <div>
+            {% if customer_ticket %}
+                <h2>Your ticket number: {{ customer_ticket.ticket_number }} </h2>
+            {% else %}
+                <h2>Please take a ticket number.</h2>
+            {% endif %}
+        </div>
+        <div class=''>
+            <ul class='counter-list'>
+                {% for counter in counters %}
+                    <li class='counter-item'>
+                        <h3>counter {{ counter.counter_number }}</h3>
+                        <p>{{ counter.cur_num }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+</html>
