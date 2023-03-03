@@ -4,6 +4,8 @@ patterns and techniques as you see fit.
 There are several ways to improve this design:
 - Building the classes on top of a different data structure on a 
   needs basis, for example using doubly linked lists instead of arrays
-  if insertion and deletion used more often than acessing indexes.
+  since they include pointers at bottom and top.
+- Additionally, using a doubly linked lists allows implementation of 
+  a circular queue, to maximise space usage. 
 - Creating an abstract class on top of these classes so that 
   other implementations are more easily implemented (through templating)
