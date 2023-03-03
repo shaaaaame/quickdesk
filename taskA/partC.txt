@@ -6,6 +6,7 @@ There are several ways to improve this design:
   needs basis, for example using doubly linked lists instead of arrays
   since they include pointers at bottom and top.
 - Additionally, using a doubly linked lists allows implementation of 
-  a circular queue, to maximise space usage. 
+  a circular queue, to maximise space usage if language does not support 
+  garbage collection
 - Creating an abstract class on top of these classes so that 
   other implementations are more easily implemented (through templating)
