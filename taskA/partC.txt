@@ -1,0 +1,9 @@
+Show how you would improve the design of your classes, apply various design
+patterns and techniques as you see fit.
+
+There are several ways to improve this design:
+- Building the classes on top of a different data structure on a 
+  needs basis, for example using doubly linked lists instead of arrays
+  if insertion and deletion used more often than acessing indexes.
+- Creating an abstract class on top of these classes so that 
+  other implementations are more easily implemented (through templating)
